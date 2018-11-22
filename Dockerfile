@@ -9,5 +9,7 @@ RUN apt-get update && apt-get install -y openssh-server vim-tiny sudo git less m
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
+COPY container-files/ /usr/local/
+
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
