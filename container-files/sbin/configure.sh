@@ -21,3 +21,16 @@ if [ "${AWS_ACCESS_KEY_ID}" ]; then
 	su www-data -c "aws configure set default.region ${AWS_DEFAULT_REGION}"
 	echo "AWS cli configured for access key ${AWS_ACCESS_KEY_ID}"
 fi
+
+if [ "${MYSQL_USER}" ]; then
+	cat <<EOF > /etc/my.cnf
+[client]
+host = ${MYSQL_HOST}
+user = ${MYSQL_USER}
+password = "${MYSQL_PASSWORD}"
+
+[mysql]
+database = "${MYSQL_DATABASE}"
+EOF
+echo "MySQL credentials configured in /etc/my.cnf"
+fi
